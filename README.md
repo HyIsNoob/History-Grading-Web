@@ -29,15 +29,20 @@ cd History-Grading-Web
 - python setup.py install
 
 ## 🌐 Demo/Preview
-**Updating...**
-
-## 🛠️ Cách sử dụng
-- Hướng dẫn chi tiết để sử dụng dự án: **Updating...**
+- [**Báo cáo & Giới thiệu dự án**](https://drive.google.com/file/d/111b4No5XGGEwEiPPWYBjXJk0XeqYzJUg/view)
+- [**Video Giới Thiệu và DEMO**](https://drive.google.com/file/d/1sJ6odCqlrNpB3QKrwVd5bQDrzV5F0vqg/view?t=1)
 
 ## 💻 Công nghệ sử dụng
 - **Ngôn ngữ:** Python, JavaScript, HTML, PHP v.v.
+- [**Dataset câu hỏi**](https://drive.google.com/file/d/1hFz3CFPesiPv73R4SwCS1hFC_noZG-kH/view)
+- [**Dataset câu trả lời**](https://drive.google.com/file/d/1VIFiRnohKBWwgPc1PF9MNj2b7lSNFTqx/view)
 
 ## 👨‍💻 Liên hệ
 - **Email:** khanghyomni@gmail.com & xnbc2203@gmail.com
 - **GitHub:** [HyIsNoob](https://github.com/HyIsNoob/)
+
+## 🛠️ Thực Hiện
+- **Với sự hướng dẫn của Thầy Phương**
+- Và sự đồng hành của: Chị Thanh Hiền (UIT), Anh Tuấn Anh (UIT), Anh Anh Khoa (BKU).
+- **Thành Viên:** Được thực hiện bởi Khang Hy & Xuân Bắc
   

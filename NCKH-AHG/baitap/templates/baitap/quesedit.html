@@ -1,0 +1,212 @@
+{% extends "pages/base.html" %}
+{% load static %}
+{% block title %}Chỉnh Sửa Câu Hỏi{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/thembai.css' %}">
+    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+<center><p><h1><label><strong>AUTOMATE HISTORY GRADING</strong><label></h1></p></center>
+</head>
+<form id='theForm' method='POST' action="{% url 'editques' %}">
+{% csrf_token %}
+{% for a, x in q.items %}
+<div style="margin-left: 12%; max-width: 76%">
+<h2>Chỉnh Sửa Câu Hỏi</h2>
+        <label>Câu số:</label><br/>
+            <input style=" 
+            background-color: #dddddd;
+            color: #666666;
+            padding: 10px 32px;
+            border: 2px solid transparent;
+            outline: none;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.4;
+            width: 100px;
+            height: 50px;
+            transition: all 0.2s;
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            cursor: text;
+            background-color: #f3f3f3;
+            margin-top: 10px;
+  " type="number" name="cauhoi" value="{{x.6}}" required id="id_cauhoi"><br/>
+        <label>Câu Hỏi:</label><br/>
+            <input style=" 
+            background-color: #dddddd;
+            color: #666666;
+            padding: 10px 32px;
+            border: 2px solid transparent;
+            outline: none;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.4;
+            width: 100px;
+            height: 50px;
+            transition: all 0.2s;
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            cursor: text;
+            background-color: #f3f3f3;
+            margin-top: 10px;
+  "type="text" name="title" maxlength="300" value='{{x.2}}' required id="id_title"><br/>
+        <label>Số Điểm: </label><br/>
+            <input style=" 
+            background-color: #dddddd;
+            color: #666666;
+            padding: 10px 32px;
+            border: 2px solid transparent;
+            outline: none;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.4;
+            width: 100px;
+            height: 50px;
+            transition: all 0.2s;
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            cursor: text;
+            background-color: #f3f3f3;
+            margin-top: 10px;
+  "type="number" name="max_point" value="{{x.1}}" step="any" required id="id_max_point"><br/>
+        <label>Thông tin:</label><br/>
+            <input style=" 
+            background-color: #dddddd;
+            color: #666666;
+            padding: 10px 32px;
+            border: 2px solid transparent;
+            outline: none;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.4;
+            width: 100px;
+            height: 50px;
+            transition: all 0.2s;
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            cursor: text;
+            background-color: #f3f3f3;
+            margin-top: 10px;
+  "type="text" name="description" maxlength="500" value='{{x.3}}' required id="id_description"><br/>
+        <label>Đáp án:</label><br/>
+            <textarea style=" 
+            background-color: #dddddd;
+            color: #666666;
+            padding: 10px 32px;
+            border: 2px solid transparent;
+            outline: none;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.4;
+            width: 100px;
+            height: 150px;
+            transition: all 0.2s;
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            cursor: text;
+            background-color: #f3f3f3;
+            margin-top: 10px;
+  "name="answergv" cols="40" rows="50" maxlength="700" id="id_answergv">{{x.5}}</textarea><br/>
+        <label>Keyword</label><br/>
+            <input style=" 
+            background-color: #dddddd;
+            color: #666666;
+            padding: 10px 32px;
+            border: 2px solid transparent;
+            outline: none;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.4;
+            width: 100px;
+            height: 50px;
+            transition: all 0.2s;
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            cursor: text;
+            background-color: #f3f3f3;
+            margin-top: 10px;
+  "name="key" cols="40" rows="10" value='{{x.7}}' required id="id_key"><br/> 
+            <input type="number" name="qid1" id="qid1" value='{{x.0}}' required hidden>
+            <input type="number" name="eid1" id="eid1" value='{{x.4}}' required hidden>
+        <button type='button' id='login1' name='login1' style="
+        align-items: center;
+        background-color: #81d4d2;
+        border: 2px solid #81d4d2;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        fill: #000;
+        font-family: Inter,sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        height: 48px;
+        justify-content: center;
+        letter-spacing: -.8px;
+        line-height: 24px;
+        min-width: 140px;
+        outline: 0;
+        padding: 0 12px;
+        text-align: center;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        border-radius: 5px;
+        margin-left: 1.2%;
+        margin-top: 50px">Save</button>
+        <input type=button value="Back" onClick="javascript:history.go(-1);" style="
+        align-items: center;
+        background-color: #81d4d2;
+        border: 2px solid #81d4d2;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        fill: #000;
+        font-family: Inter,sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        height: 48px;
+        justify-content: center;
+        letter-spacing: -.8px;
+        line-height: 24px;
+        min-width: 140px;
+        outline: 0;
+        padding: 0 12px;
+        text-align: center;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        border-radius: 5px;
+        margin-left: 1.2%;
+        margin-top: 50px">
+</div>
+</form>
+{% endfor %}
+<script type="text/javascript">
+    $(document).ready(function() {
+				$("#login1").click(function(){
+				var name1 = $("[name=title]").val();
+				var name2 = $("[name=description]").val();
+				var name3 = $("[name=max_point]").val();
+				var name4 = $("[name=answergv]").val();
+				var name5 = $("[name=key]").val();
+			if (name1 == "" || name2 == "" || name3 == "" || name4 == "" || name5 == "") {
+				Swal.fire({ icon: 'warning', title: 'Thiếu thông tin', text: 'Vui lòng điền đầy đủ thông tin', background: '#fff url(https://www.pngitem.com/pimgs/b/149-1492667_white-background-png.png)'})
+		    	return;
+			} else {
+        		document.getElementById('theForm').submit()
+        	}
+		})
+	})
+</script>
+{% endblock %}

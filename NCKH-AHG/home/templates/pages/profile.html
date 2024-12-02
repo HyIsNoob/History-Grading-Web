@@ -1,0 +1,85 @@
+{% extends "pages/base.html" %}
+{% load static %} 
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/stylesprofile.css' %}">
+
+{% if user.username %}
+    <div class="wrapper">
+    <div class="left">
+              <img src="https://66.media.tumblr.com/1a1c3bcc08b5a048b90139a56fe7f415/tumblr_o9ku1rVS8z1vnqjx7o2_250.png" alt="user" width="100">
+              <h4><strong>{{user.username}}</strong></h4>
+                {% if user.role == 0 %}
+                Học Sinh
+                {% else %}
+                Giáo Viên
+                {% endif %}
+                {% if user.school == '' %}
+                <button class="button-36" role="button" onclick='window.location.href="{% url "addprofile" %}"'>Thêm Thông Tin</button>
+                {% else %}
+                <button class="button-36" role="button" onclick='window.location.href="{% url "addprofile" %}"'>Thay Đổi Thông Tin</button>
+                {% endif %}       
+    </div>
+    <div class="right">
+        <div class="info">
+            <h3>Thông Tin Cá Nhân</h3>
+              <div class="info_data">
+                <div class="data">
+                  <label>Họ Và Tên</label>
+                  <p>{{user.first_name}}</p>
+                  <label>Email</label>
+                  <p>{{user.email}}</p>
+                  <label>Số Thứ Tự</label>
+                  <p>{{user.stt}}</p>
+                  <label>Lớp</label>
+                  {% for a, x in q.items %}
+                  <p>{{x.1}}</p>
+                  {% endfor %}
+                  <label>Trường</label>
+                  <p>{{user.school}}</p>
+                  <label>Số Điện Thoại</label>
+                  <p>{{user.phone_number}}</p>
+                  <button onclick='window.location.href="/roleselect/"'style="
+        
+        
+                  appearance: none;
+                  background-color: #FAFBFC;
+                  border: 1px solid rgba(27, 31, 35, 0.15);
+                  border-radius: 6px;
+                  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+                  box-sizing: border-box;
+                  color: #24292E;
+                  cursor: pointer;
+                  font-size: 14px;
+                  font-weight: 500;
+                  line-height: 20px;
+                  list-style: none;
+                  padding: 6px 16px;
+                  position: relative;
+                  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+                  user-select: none;
+                  -webkit-user-select: none;
+                  touch-action: manipulation;
+                  vertical-align: middle;
+                  white-space: nowrap;
+                  word-wrap: break-word;
+                  width: 33%;
+                  margin-bottom: 50px;
+          
+          
+                  ">Thay đổi vị trí</button>
+                </div>
+              </div>
+        </div>
+      </div>
+  </div>
+</body>
+</html>
+
+{% else %}
+<center><p><h1><label><strong>AUTOMATE HISTORY GRADING</strong><label></h1></p></center><br/>
+<hr/>
+    <h3><center><p>Vui lòng <a href="{% url 'login' %}">đăng nhập</a> để có quyền truy cập vào trang!</p></center></h3><hr/>
+{% endif %}
+{% endblock %}

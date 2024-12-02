@@ -1,0 +1,49 @@
+{% extends "pages/base.html" %}
+{% load static %} 
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/stylesprofile.css' %}">
+
+{% if user.username %}
+{% for c, d in f.items %}
+    <div class="wrapper">
+    <div class="left">
+              <img src="https://66.media.tumblr.com/1a1c3bcc08b5a048b90139a56fe7f415/tumblr_o9ku1rVS8z1vnqjx7o2_250.png" alt="user" width="100">
+              <h4><strong>{{d.3}}</strong></h4>
+                {% if d.16 == 0 %}
+                Học Sinh
+                {% else %}
+                Giáo Viên
+                {% endif %}  
+                <input type=button value="Back" class="button-36" onClick="javascript:history.go(-1);">
+    </div>
+    <div class="right">
+        <div class="info">
+            <h3>Thông Tin Cá Nhân</h3>
+              <div class="info_data">
+                <div class="data">
+                  <label>Họ Và Tên</label>
+                  <p>{{d.4}}</p>
+                  <label>Email</label>
+                  <p>{{d.6}}</p>
+                  <label>Số Thứ Tự</label>
+                  <p>{{d.15}}</p>
+                  <label>Lớp</label>
+                  <p>{{d.11}}</p>
+                  <label>Trường</label>
+                  <p>{{d.12}}</p>
+                  <label>Số Điện Thoại</label>
+                  <p>{{d.13}}</p>
+                  <label>Ngày tham gia</label>
+                  <p>{{d.9}}</p>
+                </div>
+              </div>
+        </div>
+      </div>
+  </div>
+</body>
+</html>
+{% endfor %}
+{% endif %} 
+{% endblock %}

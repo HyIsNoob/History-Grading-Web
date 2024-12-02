@@ -1,0 +1,26 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Confirmation{% endblock %}
+
+{% block content %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/delete.css' %}">
+<br/>
+<hr/>
+<center><h1><strong><p style='color: red'>Bạn có chắc chắn sẽ xoá? (Tác vụ này sẽ không thể hoàn tác)<p></strong></h1></center>
+<hr/>
+<center>
+    <form method='POST' action="{% url 'deleteansyes' %}">
+        {% csrf_token %}<br/>
+<input value='{{qid}}' name='qid' id='qid' hidden>
+<input value='{{id}}' name='aid' id='aid' hidden>
+<input class='xoabut' value="Delete" type='submit'>
+<input type=button class='viewbut' value="Back" onClick="reload_page()">
+</center>
+</form>
+<script>
+    function reload_page(){
+        history.back();
+    }
+</script>
+{% endblock %}
