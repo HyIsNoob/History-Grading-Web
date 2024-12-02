@@ -1,7 +1,5 @@
 
-# 🌟 Tên Dự Án 🌟
-
-![Demo Image hoặc Logo](https://i.pinimg.com/736x/5d/37/aa/5d37aad33c4741b68837e9fad593d207.jpg)
+# 🌟 Automate History Grading 🌟
 
 ## 📖 Giới thiệu
 Hệ thống web chấm bài tự luận môn lịch sử tự động sử dụng ngôn ngữ tự nhiên
@@ -19,7 +17,6 @@ Hệ thống web chấm bài tự luận môn lịch sử tự động sử dụ
 - Python 3.8, Xampp, MySQL, Python Django, underthesea
 
 ### Cách cài đặt:
-```bash
 # Clone repository
 git clone https://github.com/HyIsNoob/History-Grading-Web.git
 cd History-Grading-Web
@@ -43,5 +40,6 @@ d:\codes\python\python.exe -m pip install --upgrade pip
 - **Ngôn ngữ:** Python, JavaScript, HTML, PHP v.v.
 
 ## 👨‍💻 Liên hệ
-- **Email:** khanghyomnI@gmail.com 
-- **GitHub:** [HyIsNoob](https://github.com/HyIsNoob/)  
+- **Email:** khanghyomnI@gmail.com & xnbc2203@gmail.com
+- **GitHub:** [HyIsNoob](https://github.com/HyIsNoob/)
+  
