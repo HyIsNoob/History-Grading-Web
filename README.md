@@ -42,6 +42,7 @@ cd History-Grading-Web
 - **GitHub:** [HyIsNoob](https://github.com/HyIsNoob/)
 
 ## 🛠️ Thực Hiện
+- **Với sự hướng dẫn của Thầy Phương**
+- Và sự đồng hành của: Chị Thanh Hiền (UIT), Anh Tuấn Anh (UIT), Anh Anh Khoa (BKU).
 - **Thành Viên:** Được thực hiện bởi Khang Hy & Xuân Bắc
-- **Với sự hướng dẫn của Thầy Phương**, Và sự đồng hành của các anh/chị khóa trên học tại ĐH BK, ĐH CNTT
   
