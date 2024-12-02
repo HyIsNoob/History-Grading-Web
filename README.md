@@ -29,7 +29,7 @@ cd History-Grading-Web
 - python setup.py install
 
 ## 🌐 Demo/Preview
-**Updating...**
+[**Video Demo**](https://drive.google.com/file/d/1sJ6odCqlrNpB3QKrwVd5bQDrzV5F0vqg/view?t=1)
 
 ## 🛠️ Cách sử dụng
 - Hướng dẫn chi tiết để sử dụng dự án: **Updating...**
@@ -40,4 +40,8 @@ cd History-Grading-Web
 ## 👨‍💻 Liên hệ
 - **Email:** khanghyomni@gmail.com & xnbc2203@gmail.com
 - **GitHub:** [HyIsNoob](https://github.com/HyIsNoob/)
+
+## Thực Hiện
+- **Thành Viên:** Được thực hiện bởi Khang Hy & Xuân Bắc
+- **Với sự hướng dẫn của Thầy Phương**, Và sự đồng hành của các anh/chị khóa trên học tại ĐH BK, ĐH CNTT
   
