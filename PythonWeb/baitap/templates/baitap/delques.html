@@ -1,10 +1,24 @@
 {% extends "pages/base.html" %}
 
-{% block title %}DONE{% endblock %}
+{% block title %}Confirmation{% endblock %}
 
 {% block content %}
+<br/>
 <hr/>
-<center><h1><strong><p style='color: green'>DONE<p></strong></h1></center>
+<center><h1><strong><p style='color: red'>Are you sure about that?<p></strong></h1></center>
 <hr/>
-<button class="btn btn-primary" onclick="window.location.href='/baitap/{{id}}'">  Back</button>
+<center>
+    <form method='POST' action="{% url 'examdelete' %}">
+        {% csrf_token %}
+
+<input value='{{id}}' name='eid' id='eid' hidden>
+<input value="Delete" type='submit'>
+<input type=button value="Back" onClick="reload_page()">
+</center>
+</form>
+<script>
+    function reload_page(){
+        history.back();
+    }
+</script>
 {% endblock %}

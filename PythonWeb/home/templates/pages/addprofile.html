@@ -23,17 +23,17 @@
                 <div class="data">
                   <div class="form-group">
                     <label>Họ và Tên</label>
-                    <input name='firstname' value='{{ user.first_name }}' type="firstname" maxlength="254" id="id_firstname" class="form-control form-control-lg"></p>
+                    <input name='firstname' value='{{ user.first_name }}' type="firstname" maxlength="254" id="id_firstname" class="form-control form-control-lg" required></p>
                     <label>Email</label>
-                    <input name='email' value='{{ user.email }}' type="email" maxlength="254" id="id_email" class="form-control form-control-lg"></p>
+                    <input name='email' value='{{ user.email }}' type="email" maxlength="254" id="id_email" class="form-control form-control-lg"required></p>
                     <label>Số thứ tự</label>
-		                <input name='stt' value='{{ user.stt }}' type="number" id="id_stt" class="form-control form-control-lg"></p>
+		                <input name='stt' value='{{ user.stt }}' type="number" id="id_stt" class="form-control form-control-lg" required></p>
                     <label>Lớp</label>
-		                <input name='lop' value='{{ user.lop }}' type="text" maxlength="20" id="id_lop" class="form-control form-control-lg"></p>
+		                <input name='lop' value='{{ user.lop }}' type="text" maxlength="20" id="id_lop" class="form-control form-control-lg" required></p>
                     <label>Trường</label>
-		                <input name='school' value='{{ user.school }}' type="text" maxlength="30" id="id_school" class="form-control form-control-lg"></p>
+		                <input name='school' value='{{ user.school }}' type="text" maxlength="30" id="id_school" class="form-control form-control-lg" required></p>
                     <label>Số điện thoại</label>
-                    <input name="phone_number" value='{{ user.phone_number }}' type="text" maxlength="15" id="id_phone_number" class="form-control form-control-lg"></p>
+                    <input name="phone_number" value='{{ user.phone_number }}' type="text" maxlength="15" id="id_phone_number" class="form-control form-control-lg" required></p>
                     <input value='{{user.username}}' name='user' hidden>
                   <button class="button-36" role="button" type='submit'>Save</button>
               </div>
@@ -41,9 +41,7 @@
           </div>
         </div>
       </div>
-      
   </div>
-  
 </form>
 </body>
 </html>

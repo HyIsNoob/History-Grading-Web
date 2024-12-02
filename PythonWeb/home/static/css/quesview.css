@@ -39,7 +39,9 @@
     to {top:0; opacity:1}
   }
   
+
   /* The Close Button */
+
   .close {
     color: white;
     float: right;
@@ -67,3 +69,13 @@
     background-color: #5cb85c;
     color: white;
   }
+  
+  .custom-field {
+    position: relative;
+    font-size: 14px;
+    border-top: 20px solid transparent;
+    margin-bottom: 5px;
+    --field-padding: 12px;
+  }
+
+  

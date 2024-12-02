@@ -10,5 +10,5 @@
 <h4>Bài Làm:</h4>
 {{baitap.description|safe|linebreaks}}
 <button class="btn btn-danger" onclick="window.location.href='{{request.path}}?delete={{baitap.id}}'">Delete</button>
-<br/><button class="btn btn-primary" onclick="window.location.href='{% url 'baitap' %}'">Back</button>
+<br/><input type=button value="Back" onClick="javascript:history.go(-1);">
 {% endblock %}

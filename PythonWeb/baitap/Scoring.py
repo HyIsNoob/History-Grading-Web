@@ -4,6 +4,11 @@ import underthesea
 from . import tfidf
 import json
 import numpy as np
+import logging    # first of all import the module
+
+logging.basicConfig(filename='std.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
+logging.warning('This message will get logged on to a file')
+
 
 def similarity(model, input_1, input_2):
     def normalize(word_dict):

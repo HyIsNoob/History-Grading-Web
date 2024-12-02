@@ -33,10 +33,23 @@ class exam_question(models.Model):
     max_point = models.FloatField(default=0)
     title = models.CharField(default='', max_length=300)
     description = models.CharField(default='', max_length=500)
-    answergv = models.CharField(default='', blank=True, max_length=700)
+    answergv = models.TextField(default='', blank=True, max_length=700)
     cauhoi = models.IntegerField(default=1, blank=False)
+    key = models.TextField(default='')
     # def __str__(self):
         #return self.eid
+
+
+class lophoc(models.Model):
+    cid = models.AutoField(primary_key=True)
+    lophoc = models.CharField(default='', max_length=50)
+    sohocsinh = models.IntegerField(default=0)
+    lop = models.IntegerField(default=0)
+    uid = models.ForeignKey(CustomerUser, on_delete=CASCADE)
+
+class lophocbehind(models.Model):
+    lophocso = models.IntegerField(default=0)
+
 
 class exam_answerkey(models.Model):
     kid = models.AutoField(primary_key=True)
@@ -56,4 +69,4 @@ class exam_answer(models.Model):
     uid = models.ForeignKey(CustomerUser, on_delete=CASCADE)
     answer = models.CharField(default='', max_length=700)
     point = models.FloatField(default=0)
-    create = models.DateField(auto_now_add=True)
+    create = models.DateTimeField(auto_now_add=True)

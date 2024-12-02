@@ -1,21 +1,21 @@
 from django import forms
 from django.forms import fields, widgets
-from . models import exam_answer, exam_exam, exam_question
+from . models import exam_answer, exam_exam, exam_question, exam_answerkey, lophoc
 
 
-class nopbai(forms.ModelForm):
-    class Meta:
-        model = exam_answer
-        fields = ('answer', 'point')
-        widgets = {
-            'answer': widgets.Textarea(attrs={'id':'noidung', 'cols':'100'}),
-        }
+#class nopbai(forms.ModelForm):
+#    class Meta:
+#        model = exam_answer
+#        fields = ('answer', 'qid', 'uid',)
+#        widgets = {
+#            'answer': widgets.Textarea(attrs={'id':'noidung', 'cols':'100'}),
+#        }
 
 
 class thembai(forms.ModelForm):
     class Meta:
         model = exam_exam
-        fields = ('title','description','take','max_point','code','uid', 'start_time', 'end_time',)
+        fields = ('title','description','take','max_point','code','uid', 'start_time', 'end_time', 'time')
         widgets = {
             'title': widgets.Input(attrs={'id':'title'}),
             'description': widgets.Textarea(attrs={'id':'description'}),
@@ -25,7 +25,21 @@ class thembai(forms.ModelForm):
             'uid': widgets.Input(attrs={'id':'uid'}),
             'start_time': widgets.Input(attrs={'id':'st'}),
             'end_time': widgets.Input(attrs={'id':'et'}),
+            'time': widgets.Input(attrs={'name':'time', 'id':'time'}),
         }
+
+
+
+class themlop(forms.ModelForm):
+    class Meta:
+        model = lophoc
+        fields = ('lophoc','sohocsinh',)
+        widgets = {
+            'lophoc': widgets.Input(attrs={'id':'lophoc'}),
+            'sohocsinh': widgets.Textarea(attrs={'id':'sohocsinh'}),
+        }
+
+
 
 class addcauhoi(forms.ModelForm):
     class Meta:
@@ -50,11 +64,18 @@ class deleteques(forms.ModelForm):
         }
 
 
-class editques(forms.ModelForm):
-    class meta:
+class quesedit(forms.ModelForm):
+    class Meta:
         model = exam_question
-        fields = ('qid','max_point', 'title', 'description', 'cauhoi', 'answergv',)
+        fields = ('max_point', 'title', 'description', 'answergv', 'cauhoi','key',)
+
+
+class addkeyword(forms.ModelForm):
+    class meta:
+        model = exam_answerkey
+        fields = ('key', 'qid',)
         widgets = {
+            'key': widgets.Input(attrs={'id': 'key'}),
             'qid': widgets.Input(attrs={'id': 'qid'})
         }
 

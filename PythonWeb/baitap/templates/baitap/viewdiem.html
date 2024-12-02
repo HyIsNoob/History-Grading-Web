@@ -1,0 +1,37 @@
+{% extends "pages/base.html" %}
+
+{% block title %}View Điểm{% endblock %}
+
+{% block content %}
+<head>
+<center><p><h1><label><strong>AUTOMATE HISTORY GRADING</strong><label></h1></p></center>
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+        </style>
+</head>
+<table style="width:100%">
+    <tr>
+        <th>Câu Trả Lời</th>
+        <th>Điểm Tổng</th>
+        <th>Điểm Máy Chấm</th>
+        <th>Điểm Từ Khoá</th>
+        <th>Câu Hỏi</th>
+        <th>Thời gian nộp</th>
+        <th>Học Sinh</th>
+    </tr>
+    {% for d, e in f.items %}
+		<tr>
+			<td>{{e.1|safe|linebreaks}}</td>
+			<td>{{e.2}}</td>
+			<td>{{e.3}}</td>
+			<td>{{e.4}}</td>
+			<td>{{e.6}}</td>
+            <td>{{e.5}}</td>
+            <td>{{e.7}}</td>
+    {% endfor %}
+	</tr>
+</table>
+<input type=button value="Back" onClick="javascript:history.go(-1);">
+{% endblock %}

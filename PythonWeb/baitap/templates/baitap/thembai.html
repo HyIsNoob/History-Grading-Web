@@ -10,7 +10,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 </head>
-<form action="{% url 'saveex' %}" method="POST">
+<form action="{% url 'saveex' %}" id='theForm' method="POST">
     {% csrf_token %}
 	<div class="thembai">
 	<p><strong><h2>{{ user.username }}</h2></strong></p>
@@ -20,10 +20,11 @@
     <p>Số lần được thử lại:</p> <input type="Number" name="take" value="3" id="take" required>
 	<p>Số điểm cao nhất:</p> <input type="Number" name="max_point" value="10" id="max_point" required>
     <p>Mã số đề:</p> <input type="Number" name="code" value="0" id="code" required>
-	<p>Thời Gian làm bài:</p><input type="time" name="start_time" id="st" maxlength="20" required>
-	<p>Hạn Chót Nộp:</p><input type="date" name="end_time" id="et" maxlength="20" required>
+	<p>Thời gian bắt đầu:</p><input type="time" name="start_time" id="st" maxlength="20" required>
+	<p>Thời gian kết thúc:</p><input type="time" name="end_time" id="et" maxlength="20" required>
+	<p>Hạn chót kiểm tra:</p><input type="date" name="time" id="time" maxlength="20" required>
 	<input value='{{ user.uid }}' type="hidden" name="uid" id="uid" required>
-	<button class="button5" id="login1" name="login1" type='submit'>Thêm Bài Kiểm Tra</button>
+	<button class="button5" id="login1" name="login1" type='button'>Thêm Bài Kiểm Tra</button>
 	<button class="button6" type='button' onclick="window.location.href='/baitap/'">Quay lại</button>
 	</div>
 </form>
@@ -36,11 +37,13 @@
 				var name4 = $("[name=start_time]").val();
 				var name5 = $("[name=end_time]").val();
 			if (name1 == "" || name2 == "" || name3 == "" || name4 == "" || name5 == "") {
-			Swal.fire({ icon: 'warning', title: 'Thiếu thông tin', text: 'Vui lòng điền đầy đủ thông tin', background: '#fff url(https://www.pngitem.com/pimgs/b/149-1492667_white-background-png.png)'})
-		    return;
+				Swal.fire({ icon: 'warning', title: 'Thiếu thông tin', text: 'Vui lòng điền đầy đủ thông tin', background: '#fff url(https://www.pngitem.com/pimgs/b/149-1492667_white-background-png.png)'})
+		    	return;
+			} else if (name4 > name5){
+				Swal.fire({ icon: 'warning', title: 'Sai thời gian', text: 'Vui lòng điền đúng thời gian', background: '#fff url(https://www.pngitem.com/pimgs/b/149-1492667_white-background-png.png)'})
+				return;
 			} else {
-        		$("#login1").submit(function() {
-				})
+        		document.getElementById('theForm').submit()
         	}
 		})
 	})

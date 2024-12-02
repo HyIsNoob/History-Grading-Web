@@ -28,7 +28,24 @@ def nopbai(request):
     return render(request, 'pages/nopbai.html')
 
 def profile(request):
-    return render(request, 'pages/profile.html')
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="khanghy1102",
+        password="1102",
+        database="DeadDB"
+            )
+            
+    mycursor = mydb.cursor()
+    sql1 = "SELECT * FROM `baitap_lophoc`"
+
+    mycursor.execute(sql1)
+    myresult1 = mycursor.fetchall()
+    my_list1 = myresult1
+    my_dict1 = dict() 
+    for index,value1 in enumerate(my_list1):
+        my_dict1[index] = value1
+    context = {"q":my_dict1,}
+    return render(request, 'pages/profile.html', context)
 
 def add_profile(request):
     s = updateUser()
@@ -82,7 +99,7 @@ def rolegv(request):
             )
                     
             mycursor = mydb.cursor()
-
+            
             sql = "UPDATE user_customeruser SET role = %s WHERE username = %s"
             
             d_role = request.POST.get('role', '')
