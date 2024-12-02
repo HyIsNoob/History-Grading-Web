@@ -38,7 +38,7 @@ cd History-Grading-Web
 - [**Dataset câu trả lời**](https://drive.google.com/file/d/1VIFiRnohKBWwgPc1PF9MNj2b7lSNFTqx/view)
 
 ## 👨‍💻 Liên hệ
-- **Email:** khanghyomni@gmail.com & xnbc2203@gmail.com
+- **Email:** khanghyomni@gmail.com & buixuanbac223@gmail.com
 - **GitHub:** [HyIsNoob](https://github.com/HyIsNoob/)
 
 ## 🛠️ Thực Hiện
