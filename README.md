@@ -22,19 +22,17 @@ git clone https://github.com/HyIsNoob/History-Grading-Web.git
 cd History-Grading-Web
 
 # Cài đặt phụ thuộc
-pip install Cython
-py -m pip install Django
-pip install underthesea
-pip install scikit-learn
-python setup.py install
-d:\codes\python\python.exe -m pip install --upgrade pip
+- pip install Cython
+- py -m pip install Django
+- pip install underthesea
+- pip install scikit-learn
+- python setup.py install
 
 ## 🌐 Demo/Preview
 **Updating...**
 
 ## 🛠️ Cách sử dụng
-- Hướng dẫn chi tiết để sử dụng dự án
-**Updating**
+- Hướng dẫn chi tiết để sử dụng dự án: **Updating...**
 
 ## 💻 Công nghệ sử dụng
 - **Ngôn ngữ:** Python, JavaScript, HTML, PHP v.v.
