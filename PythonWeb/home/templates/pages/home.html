@@ -1,0 +1,33 @@
+{% extends "pages/base.html" %}
+
+{% block title %}AHG{% endblock %}
+
+{% block content %}
+{% if user.username %}
+{% load static %}
+<head>
+<center><p><h1><label><strong>AUTOMATE HISTORY GRADING</strong><label></h1></p></center>
+</head>
+<style>
+body {
+    background-image: url("https://imgur.com/ue2w6zX.gif"); /* The image used */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+}
+</style>
+
+<center><hr/>
+<p><i>Chào mừng trở lại</i> <strong>{{user.username}}!</strong></p>
+<strong><p>Cùng nhau Học Tập Môn Lịch Sử nhé!</p></strong><hr/>
+</br></br></br></br></br></br></br></br></br></br>
+<footer><h6><p><i>Được lập trình và phát triển bởi Khang Hy - Xuân Bắc</p></i></h6></footer></center>
+{% else %}<hr/>
+<center>
+<p>Chào Mừng đã đến với trang web</p>
+<strong><p>Học Tập Môn Lịch Sử</p></strong><hr/>
+</br></br></br></br></br></br></br></br></br>
+<footer><h6><p><i>Được lập trình và phát triển bởi Khang Hy - Xuân Bắc</p></i></h6></footer></center>
+{% endif %}
+
+{% endblock %}

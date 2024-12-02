@@ -1,0 +1,26 @@
+    {% extends "pages/base.html" %}
+
+    {% block title %}Bài tập Học Sinh{% endblock %} 
+    {% block content %}
+    <head>
+<center><p><h1><label><strong>AUTOMATE HISTORY GRADING</strong><label></h1></p></center>
+</head>
+{% if user.role == 1 %}
+<center><button class='btn btn-success'  onclick='window.location.href="addques/{{baitap.eid}}"'>Thêm Câu Hỏi</button></center><br/>
+{% else %}
+Mày Béo<br/>
+{% endif %}
+        {{ infor }}
+        <br/><br/>
+        {{ f }}
+        {{ baitap.description }}
+        <br/>
+        {% if page_obj.has_next %}
+        <button class="btn btn-primary" onclick='window.location.href="{{request.path}}?page={{page_obj.next_page_number}}"' >Tiếp Theo</button>
+        {% endif %}
+        {% if page_obj.has_previous %}
+            <button class="btn btn-primary" onclick='window.location.href="{{request.path}}?page={{page_obj.previous_page_number}}"' >Quay Lại</button>
+        {% endif %} 
+        
+        <button class="btn btn-primary" onclick="window.location.href='{% url 'baitap' %}'">Back</button>
+    {% endblock %}

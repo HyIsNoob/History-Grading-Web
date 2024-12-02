@@ -1,0 +1,42 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Thêm Bài{% endblock %}
+
+{% block content %}
+<head>
+<center><p><h1><label><strong>AUTOMATE HISTORY GRADING</strong><label></h1></p></center>
+</head>
+<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+<form action="{% url 'saveex' %}" method="POST">
+    {% csrf_token %}
+	<p><strong><h2>{{ user.username }}</h2></strong></p>
+    <p>Tên bài kiểm tra:</p> <input type="text" name="title" id="title" cols="100" rows="10" maxlength="300" required><br/>
+    <p>Description:</p> <textarea name="description" cols="100" rows="10" id="description" maxlength="700" required></textarea><br/>
+    Số lần được thử lại: <input type="Number" name="take" value="3" id="take" required><br/>
+	Số điểm cao nhất: <input type="Number" name="max_point" value="10" id="max_point" required><br/>
+    Mã số đề: <input type="Number" name="code" value="0" id="code" required><br/>
+	<input value='{{ user.uid }}' type="hidden" name="uid" id="uid" required>
+	<center><button class="btn btn-success" id="login1" name="login1" type='submit'>Thêm Bài Kiểm Tra</button><center>
+	
+</form>
+<script type="text/javascript">
+bkLib.onDomLoaded(function() {
+             new nicEditor().panelInstance('nsoidung');
+        }); // Thay thế text area có id là area1 trở thành WYSIWYG editor sử dụng nicEditor
+    $(document).ready(function() {
+				$("#login1").click(function(){
+				var name = $("[name=name]").val();
+                var body = $("[name=body]").val();
+			if (name == "" || body == "" ) {
+			Swal.fire({ icon: 'warning', title: 'Thiếu thông tin', text: 'Vui lòng điền đầy đủ thông tin', background: '#fff url(https://www.pngitem.com/pimgs/b/149-1492667_white-background-png.png)'})
+		    return;
+			} else {
+        		$("#login1").submit(function() {
+				})
+        	}
+		})
+	})
+</script>
+{% endblock %}
