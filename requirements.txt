@@ -1,0 +1,5 @@
+pip install Cython
+py -m pip install Django
+pip install underthesea
+pip install scikit-learn
+python setup.py install
