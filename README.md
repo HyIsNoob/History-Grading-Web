@@ -40,6 +40,6 @@ d:\codes\python\python.exe -m pip install --upgrade pip
 - **Ngôn ngữ:** Python, JavaScript, HTML, PHP v.v.
 
 ## 👨‍💻 Liên hệ
-- **Email:** khanghyomnI@gmail.com & xnbc2203@gmail.com
+- **Email:** khanghyomni@gmail.com & xnbc2203@gmail.com
 - **GitHub:** [HyIsNoob](https://github.com/HyIsNoob/)
   
