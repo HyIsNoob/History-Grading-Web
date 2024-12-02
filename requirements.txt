@@ -1,0 +1,9 @@
+pip install Cython
+py -m pip install Django
+pip install underthesea
+pip install scikit-learn
+python setup.py install
+d:\codes\python\python.exe -m pip install --upgrade pip
+
+Meeting ID: 860 4843 0598
+Passcode: zt5e5N
