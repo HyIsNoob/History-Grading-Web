@@ -1,26 +1,163 @@
     {% extends "pages/base.html" %}
-
+    {% load static %}  
     {% block title %}Bài tập Học Sinh{% endblock %} 
     {% block content %}
     <head>
-<center><p><h1><label><strong>AUTOMATE HISTORY GRADING</strong><label></h1></p></center>
-</head>
+    <link rel="stylesheet" href="{% static 'css/quesview.css' %}" type="text/css">  
+    <center><p><h1><label><strong>AUTOMATE HISTORY GRADING</strong><label></h1></p></center>
+    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    </head>
+<form method="POST" action="{% url 'save' %}">
+{% csrf_token %}
 {% if user.role == 1 %}
-<center><button class='btn btn-success'  onclick='window.location.href="addques/{{baitap.eid}}"'>Thêm Câu Hỏi</button></center><br/>
 {% else %}
-Mày Béo<br/>
+{{user.username}}<br/>
 {% endif %}
-        {{ infor }}
-        <br/><br/>
-        {{ f }}
-        {{ baitap.description }}
-        <br/>
+        {% for c, d in f.items %}
+            <h2>Quản lý bài kiểm tra (ID: {{ eid }})</h2>
+            <p>Tên: {{d.2}} </p> 
+	        <input type="text" name="title" id="eid" cols="100" rows="10" maxlength="300" required value="{{eid}}" hidden>
+	        <p>Thông tin: {{d.3}}</p>
+            <i>{{d.4}}---{{d.5}}---{{d.9}}</i><br/><br/>
+	        <div class="container">
+        {% endfor %}
+        {% for a, x in s.items %}
+        {% if s.items == '' %}
+            <center><strong><h1>Bài Kiểm Tra Không Có Câu Hỏi</h1></strong></center>
+        {% else %}
+            <input value='{{ user.uid }}' name='uid' id='uid'hidden>
+            <input type="number" name="point" value="0" step="any" id="id_point" hidden>
+            <input value='{{x.0}}' name='qid' hidden>
+            <input value='{{x.4}}' name='eid' hidden>
+            <strong>Câu Hỏi Số:</strong> {{x.6}} - ({{x.1}}đ) - <strong>{{x.2}}</strong> - {{x.3}}<br/>
+            {% if user.role == 1 %}
+                {% if x.5 == '' %}
+                <i>Chưa Có Đáp Án!</i>
+                {% else %}
+                - Đáp Án: <i>{{x.5}}</i>
+            {% endif %}
+            {% else %}
+            <textarea name="answer" cols="150" rows="10" id="noidung" maxlength="700" required></textarea><br/>
+            {% endif %}
+            {% if user.role == 1 %}
+            
+            <button type='button' >Sửa</button>
+            <button type='button' onclick='window.location.href="/baitap/deleteques/{{x.0}}"'>Xoá</button><br/>
+            {% else %}
+            {% endif %}
+        {% endif %}    
+        {% endfor %}    
         {% if page_obj.has_next %}
         <button class="btn btn-primary" onclick='window.location.href="{{request.path}}?page={{page_obj.next_page_number}}"' >Tiếp Theo</button>
         {% endif %}
         {% if page_obj.has_previous %}
             <button class="btn btn-primary" onclick='window.location.href="{{request.path}}?page={{page_obj.previous_page_number}}"' >Quay Lại</button>
+        {% endif %}
+        {% if user.role == 1 %}
+        <button class='btn btn-success' id='myBtn' type='button' onclick='window.location.href="/baitap/quanly/{{eid}}"'>Thêm Câu Hỏi</button>
+        {% else %}
+        <button id="login1" name="login1" type='submit'>Nộp Bài</button>
         {% endif %} 
-        
-        <button class="btn btn-primary" onclick="window.location.href='{% url 'baitap' %}'">Back</button>
+        <button class="btn btn-primary" type='button' onclick="window.location.href='{% url 'baitap' %}'">Back</button>    
+        </form>
+        <form method='POST' action="{% url 'saveques' %}">
+        {% csrf_token %}
+        <div id="add_question" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close">&times;</span>
+					<h2>Thêm câu hỏi</h2>
+				</div>
+				<div class="modal-body">
+                <tr><th><label for="cauhoi">Câu số:</label></th>
+                    <td><input type="number" name="cauhoi" id="cauhoi" required></td></tr><br/>
+                <tr><th><label for="title">Câu Hỏi:</label></th>
+                    <td><input type="text" name="title" id="title" cols="100" rows="10" maxlength="300" required></td></tr><br/>
+                <tr><th><label for="max_point">Số Điểm: </label></th>
+                    <td><input type="number" name="max_point" value="0" id="max_point" required></td></tr><br/>
+                <tr><th><label for="description">Thông tin:</label></th><br/>
+                    <td><textarea name="description" cols="100" rows="5" id="description" maxlength="500" required></textarea></td></tr><br/>
+                    <td><input value='{{eid}}' name="eid" id="eid" required hidden></td></tr>
+                <tr><th><label for="answergv">Đáp án:</label></th><br/>
+                    <td><textarea name="answergv" id="answergv" maxlength="700" cols="100" rows="5" required></textarea></td></tr><br/>
+					<center><button class="btn btn-success" id='login1' type='submit' >Thêm</button><center>
+				</div>
+			</div>
+		</div>
+	</div>   
+</form>
+<script type="text/javascript">
+    $(document).ready(function() {
+				$("#login1").click(function(){
+				var name = $("[name=cauhoi]").val();
+                var name2 = $("[name=title]").val();
+                var name3 = $("[name=description]").val();
+                var name4 = $("[name=answergv]").val();
+                var name5 = $("[name=max_point]").val();
+			if (name == ""|| name2 == ""|| name3 == ""|| name4 == ""|| name5 == "") {
+			Swal.fire({ icon: 'warning', title: 'Thiếu thông tin', text: 'Vui lòng điền đầy đủ thông tin', background: '#fff url(https://www.pngitem.com/pimgs/b/149-1492667_white-background-png.png)'})
+		    return;
+			} else {
+        		$("#login1").submit(function() {
+				})
+        	}
+		})
+	})
+</script>
+<script type="text/javascript">
+function addquestion() {
+	var eid = $("#eid").val();
+	var question_id = $("#question_id").val();
+	var question_title = $("#question_title").val();
+	var answer = $("#answer").val();
+	
+	$.ajax({
+                url: "api/searchcustomer.php", // gửi ajax đến đâu ghi vào nha
+                type: "post", // chọn phương thức gửi là post
+                dataType: "text", // dữ liệu trả về dạng text
+                data: {
+                    eid: eid,
+                    question_id: question_id,
+
+                },
+                success: function(result) {
+                    const obj = JSON.parse(result);
+                    if (obj["status"] == "0") {
+                        $('#customer_name').val(obj["name"]);
+                        $('#customer_address').val(obj["address"]);
+                        $('#customer_contact').val(obj["contact"]);
+                    }
+                }
+            });
+}
+</script>
+<script>
+// Get the modal
+var modal = document.getElementById("add_question");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
     {% endblock %}

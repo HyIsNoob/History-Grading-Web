@@ -1,0 +1,24 @@
+
+        <div id="add_question" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close">&times;</span>
+					<h2>Thêm câu hỏi</h2>
+				</div>
+				<div class="modal-body">
+                <tr><th><label for="cauhoi">Câu số:</label></th>
+                    <td><input type="number" name="cauhoi" id="cauhoi" required></td></tr><br/>
+                <tr><th><label for="title">Câu Hỏi:</label></th>
+                    <td><input type="text" name="title" id="title" cols="100" rows="10" maxlength="300" required></td></tr><br/>
+                <tr><th><label for="max_point">Số Điểm: </label></th>
+                    <td><input type="number" name="max_point" value="0" id="max_point" required></td></tr><br/>
+                <tr><th><label for="description">Thông tin:</label></th><br/>
+                    <td><textarea name="description" cols="100" rows="5" id="description" maxlength="500" required></textarea></td></tr><br/>
+                    <td><input value='{{eid}}' name="eid" id="eid" required hidden></td></tr>
+                <tr><th><label for="answergv">Đáp án:</label></th><br/>
+                    <td><textarea name="answergv" id="answergv" maxlength="700" cols="100" rows="5" required></textarea></td></tr><br/>
+					<center><button class="btn btn-success" id='login1' type='submit' >Thêm</button><center>
+				</div>
+			</div>
+		</div>
+	</div>   

@@ -18,5 +18,5 @@ admin.site.register(exam_answerkey, AKAdmin)
 admin.site.register(exam_primarykey)
 
 class questionAdmin(admin.ModelAdmin):
-    list_display = ['eid', 'max_point', 'title', 'qid']
+    list_display = ['eid', 'max_point', 'title', 'qid', 'cauhoi']
 admin.site.register(exam_question, questionAdmin)

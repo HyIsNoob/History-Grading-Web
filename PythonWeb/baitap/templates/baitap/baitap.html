@@ -10,7 +10,6 @@
     </head>
     {% if user.username %}
     {% if user.role == 1 %}
-        <center><button class='btn btn-success'  onclick='window.location.href="{% url "nopbai" %}"'>Nộp Bài Tập</button>
         <button class='btn btn-success'  onclick='window.location.href="{% url "thembai" %}"'>Thêm Bài Kiểm Tra</button></center>
     {% else %}
     {% endif %}
@@ -18,7 +17,10 @@
         {% for baitap in baitapp %}
         <div class="form">
         <button class="button-48" role="button" onclick='window.location.href="/baitap/{{baitap.eid}}"'><span class="text"> {{baitap.title}}</span><p>{{baitap.uid}}({{baitap.uid.stt}})</p></button>
-        <button class="btn btn-danger" onclick="window.location.href='delete/{{baitap.eid}}'">Delete</button>
+        {% if user.role == 1 %}
+            <button class="btn btn-danger" onclick="window.location.href='delete/{{baitap.eid}}'">Delete</button>
+        {% else %}
+        {% endif %}
         </div>        
         {% endfor %}
 

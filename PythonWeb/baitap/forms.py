@@ -15,25 +15,47 @@ class nopbai(forms.ModelForm):
 class thembai(forms.ModelForm):
     class Meta:
         model = exam_exam
-        fields = ('title','description','take','max_point','code','uid',)
+        fields = ('title','description','take','max_point','code','uid', 'start_time', 'end_time',)
         widgets = {
-            'title': widgets.Input(attrs={'id':'title', 'cols':'100', 'rows':"10"}),
-            'description': widgets.Textarea(attrs={'id':'description', 'cols':'100'}),
+            'title': widgets.Input(attrs={'id':'title'}),
+            'description': widgets.Textarea(attrs={'id':'description'}),
             'max_point': widgets.Input(attrs={'id':'max_point'}),
             'take': widgets.Input(attrs={'id':'take'}),
             'code': widgets.Input(attrs={'id':'code'}),
             'uid': widgets.Input(attrs={'id':'uid'}),
+            'start_time': widgets.Input(attrs={'id':'st'}),
+            'end_time': widgets.Input(attrs={'id':'et'}),
         }
 
-class themques(forms.ModelForm):
+class addcauhoi(forms.ModelForm):
     class Meta:
         model = exam_question
-        fields = ('max_point', 'title', 'description', 'eid',)
+        fields = ('max_point', 'title', 'description', 'eid', 'cauhoi', 'answergv',)
         widgets = {
             'title': widgets.Input(attrs={'id':'title', 'cols':'100', 'rows':"10"}),
             'description': widgets.Textarea(attrs={'id':'description', 'cols':'100'}),
             'max_point': widgets.Input(attrs={'id':'max_point'}),
             'eid': widgets.Input(attrs={'id':'eid'}),
+            'cauhoi': widgets.Input(attrs={'id':'cauhoi'}),
+            'answergv': widgets.Input(attrs={'id':'answergv'}),
+        }
+
+
+class deleteques(forms.ModelForm):
+    class meta:
+        model = exam_question
+        fields = ('qid',)
+        widgets = {
+            'qid': widgets.Input(attrs={'id': 'qid'})
+        }
+
+
+class editques(forms.ModelForm):
+    class meta:
+        model = exam_question
+        fields = ('qid','max_point', 'title', 'description', 'cauhoi', 'answergv',)
+        widgets = {
+            'qid': widgets.Input(attrs={'id': 'qid'})
         }
 
 

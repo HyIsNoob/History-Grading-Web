@@ -24,7 +24,7 @@ class exam_exam(models.Model):
     take = models.IntegerField(default=3)
     time = models.TimeField(default=0)
     code = models.IntegerField(default=0)
-    create = models.CharField(max_length=20)
+    create = models.DateTimeField(auto_now_add=True)
 
 
 class exam_question(models.Model):
@@ -33,6 +33,8 @@ class exam_question(models.Model):
     max_point = models.FloatField(default=0)
     title = models.CharField(default='', max_length=300)
     description = models.CharField(default='', max_length=500)
+    answergv = models.CharField(default='', blank=True, max_length=700)
+    cauhoi = models.IntegerField(default=1, blank=False)
     # def __str__(self):
         #return self.eid
 
