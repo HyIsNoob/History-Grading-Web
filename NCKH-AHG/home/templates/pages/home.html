@@ -1,0 +1,45 @@
+{% extends "pages/base.html" %}
+
+{% block title %}AHG{% endblock %}
+
+{% block content %}
+<head>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/theme1.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/theme2.css' %}" type="text/css">
+</head>
+<body>
+    <div class="hygay">
+        <p>Copyright &copy; 2021 AUTOMATE HISTORY GRADING</p>
+    </div>
+    <section class="hero hero-bg d-flex justify-content-center align-items-center">
+        <div class="container">
+             <div class="row">
+                 <div class="col-lg-6 col-md-10 col-12 d-flex flex-column justify-content-center align-items-center">
+                       <div class="hero-text">
+                            
+                            {% if user.username %}
+                            <h1 class="text-white" id="left"  data-aos="fade-up">Chào mừng bạn trở lại</br> với hệ thống</h1>
+                              {% if user.role == 0 %}
+                              <a href="{% url 'baitap' %}" class="custom-btn btn-bg btn mt-3" id="left">Vào làm bài tập!</a>
+                              {% else %}
+                              <a href="{% url 'baitap' %}" class="custom-btn btn-bg btn mt-3" id="left">Vào xem điểm và quản lý bài kiểm tra!</a>
+                              {% endif %}
+                            {% else %}
+                            <h1 class="text-white" id="left"  data-aos="fade-up">Chào mừng bạn đã đến với</br> với hệ thống</h1>
+                            <a href="{% url "login" %}" class="custom-btn btn-bg btn mt-3" id="left">Vui lòng đăng nhập để biết thêm thông tin chi tiết</a>
+                            {% endif %}
+                       </div>
+                      </div>
+                 <div class="col-lg-6 col-12">
+                   <div class="hero-image" >
+                     <img src="images/working-girl.png" class="img-fluid" alt="">
+                   </div>
+                 </div>
+
+             </div>
+        </div>
+</section>
+    {% endblock %}
+</body>

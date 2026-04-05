@@ -1,0 +1,38 @@
+{% extends "pages/base.html" %}
+{% load static %}
+{% block title %}role{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/stylesprofile.css' %}">
+<form method='POST' action='{% url "rolegv" %}'>
+    {% csrf_token %}
+  <div class="wrapper">
+    <div class="left">
+      <img src="https://66.media.tumblr.com/1a1c3bcc08b5a048b90139a56fe7f415/tumblr_o9ku1rVS8z1vnqjx7o2_250.png" alt="user" width="100">
+        <h4><strong>{{user.username}}</strong></h4>
+          {% if user.role == 0 %}
+            Học Sinh
+          {% else %}
+            Giáo Viên
+          {% endif %}
+    </div>
+    <div class="right">
+        <div class="info">
+            <h3>Thông Tin Cá Nhân</h3>
+              <div class="info_data">
+                <div class="data">
+                  <div class="form-group">
+                    <input value='{{user.username}}' name='user' hidden><br/>
+                    <input type='radio' name='role' value='0'> Học Sinh<br/>
+                    <input type='radio' name='role' value='1'> Gíao Viên<br/>
+                    <button class="button-36" role="button" type='submit'>Xác Nhận</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</form>
+</body>
+</html>
+{% endblock %}

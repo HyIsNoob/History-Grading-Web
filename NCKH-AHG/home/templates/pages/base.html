@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi" dir="ltr">
+<head>
+    
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style11.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/button1.css' %}" type="text/css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scales=1.0">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <i class='bx bxl-css3'></i>
+                <div class="logo_name">  AHG</div>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nal_list">
+            <li>
+                <a href="/">
+                <i class='bx bx-grid'></i>
+                <span class="links_name">Trang Chủ</span>
+                </a>
+                <span class="tooltip">Trang Chủ</span>
+            </li>
+            <li>
+                <a href="{% url 'profile' %}">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Người Dùng</span>
+                </a>
+                <span class="tooltip">Người Dùng</span>
+            </li>
+            <li>
+                <a href="{% url 'baitap' %}">
+                <i class='bx bxs-book-content' ></i>
+                <span class="links_name">Bài Tập</span>
+                </a>
+                <span class="tooltip">Bài Tập</span>
+            </li>
+            <li>
+                <a href="{% url 'contact' %}">
+                <i class='bx bx-store' ></i>
+                <span class="links_name">Cửa Hàng</span>
+                </a>
+                <span class="tooltip">Cửa Hàng</span>
+            </li>
+            <li>
+                <a href="{% url 'contact' %}">
+                <i class='bx bx-cog' ></i>
+                <span class="links_name">Cài Đặt</span>
+                </a>
+                <span class="tooltip">Cài Đặt</span>
+            </li>
+        </ul>
+    <div class="profile_content">
+        <div class="profile">
+            <div class="profile_details">
+                <div class="name_job">
+                    {% if user.username %}
+                    <img src="{% static 'images/hey.png' %}">
+                    <a href="{% url 'profile' %}"><span style="font-size: 3vh;
+                        color: rgb(255, 255, 255);
+                        text-decoration: none;
+                        padding: 1vh 1vh 1vh 1vh;
+                        height: 100vh;
+                        padding-top: 50vh;
+                        width: 50%;
+                        vertical-align: text-bottom;
+                        line-height: 2;
+                        text-align: justify;"> {{user.username}}</span></a>
+                    <a href="{% url 'logout' %}" class='bx bx-log-out' id="log_out"></a>
+                    {% else %}
+                    <button style='  align-items: center;
+                    background-color: #3976d8;
+                    border: 2px solid #3976d8;
+                    box-sizing: border-box;
+                    color: #fff;
+                    cursor: pointer;
+                    display: inline-flex;
+                    fill: #000;
+                    font-family: Inter,sans-serif;
+                    font-size: 16px;
+                    font-weight: 600;
+                    height: 40px;
+                    justify-content: center;
+                    letter-spacing: -.8px;
+                    line-height: 24px;
+                    min-width: 100px;
+                    padding: -17px 17px;
+                    text-align: center;
+                    text-decoration: none;
+                    transition: all .3s;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    touch-action: manipulation;' onclick='window.location.href="{% url "register" %}"'><span>Đăng ký</span></button>  
+                    <button class='button-81' style='  align-items: center;
+                    background-color: #3976d8;
+                    border: 2px solid #3976d8;
+                    box-sizing: border-box;
+                    color: #fff;
+                    cursor: pointer;
+                    display: inline-flex;
+                    fill: #000;
+                    font-family: Inter,sans-serif;
+                    font-size: 16px;
+                    font-weight: 600;
+                    height: 40px;
+                    justify-content: center;
+                    letter-spacing: -.8px;
+                    line-height: 24px;
+                    min-width: 100px;
+                    padding: -17px 17px;
+                    text-align: center;
+                    text-decoration: none;
+                    transition: all .3s;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    touch-action: manipulation;' onclick='window.location.href="{% url "login" %}"'>Đăng nhập</button>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="home_content">
+        
+        <div class="text">
+           {% block content %}
+           {% endblock %}
+           
+        </div>
+        <br/><center>
+    </center>
+    </div>
+
+<script>
+    let btn = document.querySelector("#btn");
+    let sidebar = document.querySelector(".sidebar");
+
+btn.onclick = function() {
+    sidebar.classList.toggle("active");
+}
+</script>
+</body>
+</html>

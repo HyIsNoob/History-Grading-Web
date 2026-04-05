@@ -1,0 +1,188 @@
+    {% extends "pages/base.html" %}
+    {% load static %}
+
+    {% block title %}Bài tập Học Sinh{% endblock %} 
+    {% block content %}
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="{% static 'css/stylehw.css' %}">
+    <center><p><h1><label><strong>AUTOMATE HISTORY GRADING</strong><label></h1></p></center>
+    </head>
+    <body>
+    {% if user.username %}
+    {% if user.role == 1 %}
+    <center>
+        <button class='btn btn-success'  onclick='window.location.href="{% url "thembai" %}"'style="
+        background-color: rgba(51, 51, 51, 0.05);
+        border-radius: 8px;
+        border-width: 0;
+        color: #333333;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        list-style: none;
+   
+        padding: 10px 12px;
+        text-align: center;
+        transition: all 200ms;
+        vertical-align: baseline;
+        white-space: nowrap;
+         user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;">Thêm Bài Kiểm Tra</button> 
+    </center>
+    {% else %}
+    {% endif %}
+    <div class="main">
+        {% for baitap in baitapp %}
+        
+        <div class="form">
+            {% if baitap.uid == user.username %}
+            GAY
+            {%else%}
+        <button class="button-48" role="button" onclick='window.location.href="/baitap/{{baitap.eid}}"'><span class="text"> {{baitap.title}}</span><p>{{baitap.uid}}({{baitap.uid.stt}})</p></button>
+        {% if user.role == 1 %}
+            {% if user.uid == baitap.uid_id %}
+            <button id="edit" name='edit' onclick='window.location.href="{% url 'editexam' baitap.eid %}"' style="
+        
+        
+            appearance: none;
+            background-color: #FAFBFC;
+            border: 1px solid rgba(27, 31, 35, 0.15);
+            border-radius: 6px;
+            box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+            box-sizing: border-box;
+            color: #24292E;
+            cursor: pointer;
+    
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            list-style: none;
+            padding: 6px 16px;
+            position: relative;
+            transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            white-space: nowrap;
+            word-wrap: break-word;
+            width: 10%;
+            margin-top:10px;
+            margin-bottom: 10px;
+    
+            
+            ">Edit</button>
+            <button id="deleete" name='deleete' onclick='window.location.href="{% url 'delexam' baitap.eid %}"' style="
+        
+        
+            appearance: none;
+            background-color: #FAFBFC;
+            border: 1px solid rgba(27, 31, 35, 0.15);
+            border-radius: 6px;
+            box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+            box-sizing: border-box;
+            color: #24292E;
+            cursor: pointer;
+    
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            list-style: none;
+            padding: 6px 16px;
+            position: relative;
+            transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            white-space: nowrap;
+            word-wrap: break-word;
+            width: 10%;
+            margin-top:10px;
+            margin-bottom: 10px;
+    
+            
+            ">Delete</button>
+            {% else %}
+            
+            {% endif %}
+        {% else %}
+
+        {% endif %}
+        {% endif %}
+        
+        </div>        
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <button class="btn btn-primary" onclick='window.location.href="{{request.path}}?page={{page_obj.next_page_number}}"' style="
+            align-items: center;
+            background-color: #81d4d2;
+            border: 2px solid #81d4d2;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            fill: #000;
+            font-family: Inter,sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            height: 48px;
+            justify-content: center;
+            letter-spacing: -.8px;
+            line-height: 24px;
+            min-width: 140px;
+            outline: 0;
+            padding: 0 12px;
+            text-align: center;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            border-radius: 5px;
+            margin-left: 1.2%;
+            margin-top: 50px">Tiếp Theo</button>
+        {% endif %}
+        {% if page_obj.has_previous %}
+            <button class="btn btn-primary" onclick='window.location.href="{{request.path}}?page={{page_obj.previous_page_number}}"'style="
+            align-items: center;
+            background-color: #81d4d2;
+            border: 2px solid #81d4d2;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            fill: #000;
+            font-family: Inter,sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            height: 48px;
+            justify-content: center;
+            letter-spacing: -.8px;
+            line-height: 24px;
+            min-width: 140px;
+            outline: 0;
+            padding: 0 12px;
+            text-align: center;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            border-radius: 5px;
+            margin-left: 1.2%;
+            margin-top: 50px" >Quay Lại</button>
+            
+        {% endif %} 
+ </div>
+    {% else %}
+    <br/><hr/>
+    <h3><center><p>Vui lòng <a href="{% url 'login' %}">đăng nhập</a> để xem thông tin chi tiết!</p></center></h3><hr/>
+    {% endif %}
+</body>
+
+    {% endblock %}

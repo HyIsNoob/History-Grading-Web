@@ -1,0 +1,75 @@
+{% extends "pages/base.html" %}
+
+{% block title %}View Điểm{% endblock %}
+
+{% block content %}
+<head>
+<center><p><h1><label><strong>AUTOMATE HISTORY GRADING</strong><label></h1></p></center>
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+        table {
+          counter-reset: tableCount;     
+        }
+        .counterCell:before {              
+            content: counter(tableCount); 
+            counter-increment: tableCount; 
+        }
+        </style>
+        {% load static %}
+    <link rel="stylesheet" href="{% static 'css/stylevd.css' %}">
+</head>
+
+
+<table>
+ 
+  <tr>
+  <th>#</th>
+  <th>Câu Trả Lời</th>
+  <th>Điểm Tổng</th>
+  <th>Điểm Máy Chấm </th>
+  <th>Điểm Từ Khóa </th>
+  <th>Thời Gian Nộp</th>
+  <th>Tác Vụ</th>
+  </tr>
+  {% for d, e in f.items %}
+  {% if f.items %}
+  <tr>
+    <td class="counterCell"></td>
+    <td>{{e.1|safe|linebreaks}}</td>
+    <td>{{e.2}}</td>
+    <td>{{e.3}}</td>
+    <td>{{e.4}}</td>
+    <td>{{e.5}}</td>
+    <td><form method='POST' action="/baitap/deleteans/{{e.0}}/">
+        {% csrf_token %}
+    <input value='{{e.6}}' name='qid' id='qid' hidden>
+    <button type='submit' class='xoabut'>Xoá</button><br/>
+      </form>
+      <form method='POST' action="/baitap/profileshow/{{e.7}}/">
+        {% csrf_token %}
+    <button type='submit' class='viewbut'>Xem Học Sinh</button><br/>
+      </form>
+    </td>
+    {%else%}
+    Bruh
+    {%endif%}
+  {% endfor %}
+</tr>
+  
+  </table>
+<button style="
+margin-left: 12%;
+font-size: 17px;
+letter-spacing: 0.1em;
+text-decoration: none;
+color: #abb7ba;
+background-color: #ffffff;
+padding: 5px 20px 5px 20px;
+position: relative;
+border: 3px solid #ffffff;
+cursor: pointer;
+margin-top: 20px;
+"  id="viewpoint" onclick='window.location.href="/baitap/{{eid}}"' name='viewpoint'><- Quay Lại</button>
+{% endblock %}

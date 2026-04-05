@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    {% load static %} 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+        <link rel="stylesheet" href="{% static 'css/register.css' %}" type="text/css">
+        <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+        <title>Đăng Nhập</title>
+    </head>
+    <body>
+        <div class="nav">
+            <div class="card">
+                <form method="POST">
+                {% csrf_token %}
+                <h2>ĐĂNG NHẬP</h2> 
+                {{ form.role }}
+                {% for key, value in form.errors.items %}
+                {{value}}
+                {% endfor %}
+                <p><label>Tên Đăng Nhập </label><input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username"></p>
+                <p><label>Mật Khẩu </label><input type="password" name="password" autocomplete="current-password" required id="id_password"></p>
+                <input type="hidden" name="next" value="/"/>
+                <input class="btn btn-success" type="submit" value="Đăng nhập"/> 
+                <p class="new">Chưa có tài khoản? <a href="{% url 'register' %}">Đăng ký</a></p>
+                <p class="new">Quay trở lại trang chủ? <a href="/">Quay lại</a></p>
+                <div class="signin">
+                    <h3>Hoặc Đăng Nhập Bằng</h3>
+                    <ul class="linkk">
+                        <li><img src="{% static 'images/fb.png' %}"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+	$(document).ready(function() {
+				$("#login1").click(function(){
+				var username1 = $("[name=username]").val();
+				var password1 = $("[name=password]").val();
+			if (username1 == "" || password1 == "" ) {
+			Swal.fire({ icon: 'warning', title: 'Thiếu Thông Tin', text: 'Vui lòng điền đầy đủ thông tin!', background: '#fff url(https://www.pngitem.com/pimgs/b/149-1492667_white-background-png.png)'})
+		    return;
+			}
+		     else {
+        		$("#login1").submit(function() {
+				})
+        	}
+		})
+	})
+</script>
+    </body>
+</html>
+
+
+

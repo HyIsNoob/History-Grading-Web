@@ -1,0 +1,546 @@
+{% extends "pages/base.html" %}
+{% load static %}  
+{% block title %}Bài Tập Học Sinh{% endblock %} 
+{% block content %}
+<head>
+<link rel="stylesheet" href="{% static 'css/quesview.css' %}" type="text/css">  
+<center><p><h1><label><strong>AUTOMATE HISTORY GRADING</strong><label></h1></p></center>
+<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'jquery-cookie/jquery.cookie.js' %}"></script>
+</head>
+<script>
+document.cookie = "token=dsfhi21";
+function getCookie(cname) {
+let name = cname + "=";
+let decodedCookie = decodeURIComponent(document.cookie);
+let ca = decodedCookie.split(';');
+for(let i = 0; i <ca.length; i++) {
+let c = ca[i];
+while (c.charAt(0) == ' ') {
+  c = c.substring(1);
+}
+if (c.indexOf(name) == 0) {
+  return c.substring(name.length, c.length);
+}
+}
+return "";
+}
+</script>
+{{ csrf_input }}
+  {% csrf_token %}
+    {% for c, d in f.items %}
+    {% if user.role == 1 %}
+    <p style="
+      color: black;
+      text-align: center;
+    ">Quản lý bài kiểm tra (ID: {{ eid }})</p>
+    {% else %}
+    {% endif %}
+    <input style="
+      margin-left: 12%;
+      font-size: 17px;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: #abb7ba;
+      background-color: #ffffff;
+      padding: 5px 20px 5px 20px;
+      position: relative;
+      border: 3px solid #ffffff;
+      cursor: pointer;
+      margin-top: 15px;
+    "    
+     type=button value="<- Quay Lại" onClick="window.location.href='/baitap/'"> 
+  
+  <div style="margin-left: 12%; margin-right: 12%; font-size: 20px">
+        <p style="color: #393d4a; padding: 5px 0 5px 0; background: #dff1f5; padding: 25px; margin-bottom: 15px; margin-top: 15px">{{d.2}} </p> 
+      <input type="text" name="title" id="eid" cols="100" rows="10" maxlength="300" required value="{{eid}}" hidden>
+      <div style="background: #f7f7f7; padding: 25px; margin-bottom: 15px; font-weight: normal; color: black; font-size: 18px"><p style="font-weight: bold">Thông tin </p><p style="font-weight: normal; margin-bottom: 10px"> {{d.3}}</p>
+          <i>   <span style="font-weight: bold"> Thời gian bắt đầu </span> <br/> 
+            <p style="font-weight: normal; margin-bottom: 10px"> {{d.4}} </p>
+                <span style="font-weight: bold"> Thời gian kết thúc </span> <br/> 
+            <p style="font-weight: normal; margin-bottom: 10px"> {{d.5}} </p>
+                <span style="font-weight: bold"> Hạn chót nộp bài </span><br/> 
+            {{d.7}}</i><br/>
+      </div>
+      <div class="container">
+  </div>
+    
+    {% for a, x in s.items %}
+    {% if x %}
+    <input value='{{x.4}}' name='eid' id='eid1' hidden>
+        <div style="color: #393d4a; padding: 5px 0 5px 0; background: #f7f7f7; padding: 25px; "><strong>Câu Hỏi Số:</strong>{{x.6}} <span style="color: red"> ({{x.1}}đ) </span> <p>{{x.2}}</p><p>{{x.3}}</p></div>
+        {% if user.role == 1 %}
+            {% if x.5 == None %}
+            <i>Chưa Có Đáp Án!</i>
+            {% else %}
+            <div style="
+              font-weight: normal;
+              padding: 25px;
+              background: #f7f7f7;
+              margin-bottom: 15px;
+            " ><p>{{x.5|safe|linebreaks}}</p></div>
+            {% endif %}
+            {% else %}
+      <form method='POST' action="{% url 'save' eid %}" id='theForm'>
+        {% csrf_token %}
+        <input value='{{x.0}}' class='ques_id' name='ques_id' hidden>
+        <input name='uid' id='uid' value='{{user.uid}}' hidden>
+        <textarea style=" 
+            background-color: #dddddd;
+            color: #666666;
+            padding: 1em;
+            border: 2px solid transparent;
+            outline: none;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.4;
+            width: 200px;
+            height: 100px;
+            transition: all 0.2s;
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            cursor: text;
+            background-color: #f7f7f7;
+  " placeholder="Vui lòng nhập nội dung..." name='answer' id='answer'></textarea><br/>
+        <button id='nopbai1' name='nopbai1' onClick='nopbai()' type='submit' style="
+        
+        
+        appearance: none;
+        background-color: #FAFBFC;
+        border: 1px solid rgba(27, 31, 35, 0.15);
+        border-radius: 6px;
+        box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+        box-sizing: border-box;
+        color: #24292E;
+        cursor: pointer;
+
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        list-style: none;
+        padding: 6px 16px;
+        position: relative;
+        transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        white-space: nowrap;
+        word-wrap: break-word;
+        width: 100%;
+        margin-bottom: 50px;
+
+        
+        ">Nộp Bài</button>
+      </form>
+        {% endif %} 
+          {% endif %}
+        {% if user.role == 1 %}
+        {% if user.uid == d.10 %}
+            
+        
+        <form method='POST' action="{% url 'delques' x.0 %}">
+          {% csrf_token %}
+        <button id="viewpoint" onclick='window.location.href="/baitap/viewdiem/{{x.0}}"'type='button' name='viewpoint' style="
+        
+        
+        appearance: none;
+        background-color: #FAFBFC;
+        border: 1px solid rgba(27, 31, 35, 0.15);
+        border-radius: 6px;
+        box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+        box-sizing: border-box;
+        color: #24292E;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        list-style: none;
+        padding: 6px 16px;
+        position: relative;
+        transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        white-space: nowrap;
+        word-wrap: break-word;
+        width: 33%;
+        margin-bottom: 50px;
+
+
+        ">Xem điểm</button>
+        <button type='button' id='edit' name='edit 'onclick='window.location.href="/baitap/quesedit/{{x.0}}"' style="
+        
+        
+        appearance: none;
+        background-color: #FAFBFC;
+        border: 1px solid rgba(27, 31, 35, 0.15);
+        border-radius: 6px;
+        box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+        box-sizing: border-box;
+        color: #24292E;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        list-style: none;
+        padding: 6px 16px;
+        position: relative;
+        transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        white-space: nowrap;
+        word-wrap: break-word;
+        width: 32%;
+        margin-bottom: 50px;
+
+        
+        ">Sửa</button>
+        <input value='{{x.4}}' name='eid' id='eid' hidden>
+        <button type='submit' style="
+        
+        
+        appearance: none;
+        background-color: #FAFBFC;
+        border: 1px solid rgba(27, 31, 35, 0.15);
+        border-radius: 6px;
+        box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+        box-sizing: border-box;
+        color: #24292E;
+        cursor: pointer;
+
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        list-style: none;
+        padding: 6px 16px;
+        position: relative;
+        transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        white-space: nowrap;
+        word-wrap: break-word;
+        width: 33%;
+        margin-bottom: 50px;
+
+        
+        ">Xoá</button><br/>
+        </form>
+        {% else %}
+
+        {% endif %}
+        <hr style="margin-bottom: 50px"/>
+        
+        {% else %}
+
+        {% endif %}
+        
+    {% if page_obj.has_next %}
+      <button class="btn btn-primary" onclick='window.location.href="{{request.path}}?page={{page_obj.next_page_number}}"' >Tiếp Theo</button>
+    {% endif %}
+    {% if page_obj.has_previous %}
+        <button class="btn btn-primary" onclick='window.location.href="{{request.path}}?page={{page_obj.previous_page_number}}"' >Quay Lại</button>
+    {% endif %}
+    
+    {% endfor %}
+    {% if user.role == 1 %}
+    {% if user.uid == d.10 %}
+      <button style="
+      width: 100%;
+      background-color: #4CAF50; 
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+
+    "  id='myBtn' type='button' onclick='window.location.href="/baitap/quanly/{{eid}}"'>Thêm Câu Hỏi</button>
+      {% else %}
+        {% endif %}
+    {% else %}
+    {% endif %}
+    
+    {% endfor %}
+    <form method='POST' action="/baitap/saveques/">
+      {% csrf_token %}
+
+
+
+      <div id="add_question" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2 style="padding: 15px">THÊM CÂU HỎI</h2>
+      </div>
+      <div class="modal-body">
+              <tr><th><label for="cauhoi">Câu Số</label></th>
+                  <td><input placeholder="Câu số" style=" 
+                    background-color: #dddddd;
+                    color: #666666;
+                    padding: 10px 32px;
+                    border: 2px solid transparent;
+                    outline: none;
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 1.4;
+                    width: 100px;
+                    height: 50px;
+                    transition: all 0.2s;
+                    width: 100%;
+                    max-width: 100%;
+                    min-width: 100%;
+                    cursor: text;
+                    background-color: #f3f3f3;
+                    margin-top: 10px;
+          " type="number" name="cauhoi" id="cauhoi" required></td></tr><br/>
+              <tr><th><label for="title">Câu Hỏi:</label></th>
+                  <td><input placeholder="Nhập Câu Hỏi" style=" 
+                    background-color: #dddddd;
+                    color: #666666;
+                    padding: 10px 32px;
+                    border: 2px solid transparent;
+                    outline: none;
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 1.4;
+                    width: 100px;
+                    height: 50px;
+                    transition: all 0.2s;
+                    width: 100%;
+                    max-width: 100%;
+                    min-width: 100%;
+                    cursor: text;
+                    background-color: #f3f3f3;
+                    margin-top: 10px;
+          " type="text" name="title" id="title" cols="100" rows="10" maxlength="300" required></td></tr><br/>
+              <tr><th><label for="max_point">Số Điểm: </label></th>
+                  <td><input placeholder="Nhập điểm của câu" style=" 
+                    background-color: #dddddd;
+                    color: #666666;
+                    padding: 15px 32px;
+                    border: 2px solid transparent;
+                    outline: none;
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 1.4;
+                    width: 100px;
+                    height: 50px;
+                    transition: all 0.2s;
+                    width: 100%;
+                    max-width: 100%;
+                    min-width: 100%;
+                    cursor: text;
+                    background-color: #f3f3f3;
+                    margin-top: 10px;
+          " type="number" name="max_point" value="0" id="max_point" required></td></tr><br/>
+              <tr><th><label for="description">Thông tin:</label></th><br/>
+                  <td> <textarea style=" 
+                    background-color: #dddddd;
+                    color: #666666;
+                    padding: 10px 32px;
+                    border: 2px solid transparent;
+                    outline: none;
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 1.4;
+                    width: 100px;
+                    height: 50px;
+                    transition: all 0.2s;
+                    width: 100%;
+                    max-width: 100%;
+                    min-width: 100%;
+                    cursor: text;
+                    background-color: #f3f3f3;
+                    margin-top: 10px;
+          " placeholder="Vui lòng nhập nội dung..." name='description' id='description'></textarea></td></tr><br/>
+                  <td><input value='{{eid}}' name="eid" id="eid" required hidden></td></tr>
+              <tr><th><label for="answergv">Đáp án:</label></th><br/>
+                  <td> <textarea style=" 
+                    background-color: #dddddd;
+                    color: #666666;
+                    padding: 10px 32px;
+                    border: 2px solid transparent;
+                    outline: none;
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 1.4;
+                    width: 100px;
+                    height: 50px;
+                    transition: all 0.2s;
+                    width: 100%;
+                    max-width: 100%;
+                    min-width: 100%;
+                    cursor: text;
+                    background-color: #f3f3f3;
+                    margin-top: 10px;
+          " placeholder="Vui lòng nhập đáp án..." name='answergv' id='answergv'></textarea></td></tr><br/>
+              <tr><th><label for="key">Từ Khoá:</label></th><br/>
+                  <td><textarea style=" 
+                    background-color: #dddddd;
+                    color: #666666;
+                    padding: 10px 32px;
+                    border: 2px solid transparent;
+                    outline: none;
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 1.4;
+                    width: 100px;
+                    height: 50px;
+                    transition: all 0.2s;
+                    width: 100%;
+                    max-width: 100%;
+                    min-width: 100%;
+                    cursor: text;
+                    background-color: #f3f3f3;
+                    margin-top: 10px;
+          " placeholder="Vui lòng nhập từ khoá..." name='key' id='key'></textarea></td></tr><br/>
+                  <input type="hidden" name="next" value="{{ request.path }}">    
+        <center><button id='login11' type='submit' style="
+          width: 100%;
+          background-color: #4CAF50; 
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin-top: 15px;
+          margin-bottom: 1px;
+    
+        " >Thêm</button><center>      
+      </div>
+    </div>
+  </div>
+  </div>
+  </form>
+
+{% csrf_token %}
+<script type="text/javascript">
+function addquestion() {
+var eid = $("#eid").val();
+var question_id = $("#question_id").val();
+var question_title = $("#question_title").val();
+var answer = $("#answer").val();
+$.ajax({
+              url: "api/searchcustomer.php", // gửi ajax đến đâu ghi vào nha
+              type: "post", // chọn phương thức gửi là post
+              dataType: "text", // dữ liệu trả về dạng text
+              data: {
+                  eid: eid,
+                  question_id: question_id,
+
+              },
+              success: function(result) {
+                  const obj = JSON.parse(result);
+                  if (obj["status"] == "0") {
+                      $('#customer_name').val(obj["name"]);
+                      $('#customer_address').val(obj["address"]);
+                      $('#customer_contact').val(obj["contact"]);
+                  }
+              }
+          });
+}
+</script>
+<script>
+// Get the modal
+var modal = document.getElementById("add_question");
+
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modal) {
+  modal.style.display = "none";
+}
+}
+</script>
+<script type="text/javascript">
+function nopbai(){
+var total = $(".ques_id").length;
+var token = getCookie(token);//getCookie(token)
+const data = {
+token: token,
+answer: [],
+}
+for (let i = 0; i < total; i++) {
+var answerid = document.getElementsByClassName('ques_id')[i].value;
+var answer = document.getElementById(answerid).value;
+var obj = {
+id: '',
+content: '',
+}
+obj.id = answerid;
+obj.content = answer;
+data.answer[i] = obj;
+}
+return data;
+}
+function submit1(){
+var answer = $("[name=answer]").val();
+if (answer == ''){
+Swal.fire({ icon: 'warning', title: 'Thiếu thông tin', text: 'Vui lòng điền đầy đủ thông tin', background: '#fff url(https://www.pngitem.com/pimgs/b/149-1492667_white-background-png.png)'})
+    return;
+}else {
+var csrftoken = $.cookie('csrftoken');
+
+function csrfSafeMethod(method) {
+// these HTTP methods do not require CSRF protection
+return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+$.ajaxSetup({
+beforeSend: function(xhr, settings) {
+    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+    }
+}
+});
+console.log(JSON.stringify(nopbai()));
+    $.ajax({
+        url: "{% url 'save' eid %}", // gửi ajax đến 'save' eid
+        type: "get", // chọn phương thức gửi là post
+        data: JSON.stringify(nopbai()),
+        contentType: "application/json; charset=utf-8",
+        success: function(result) {
+          Swal.fire({ icon: 'success', title: 'Đã Lưu thành công', text: 'Bấm nộp bài nếu bạn đã làm xong!', background: '#fff url(https://www.pngitem.com/pimgs/b/149-1492667_white-background-png.png)'});
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+          Swal.fire({ icon: 'error', title: 'Lỗi', text: 'Lỗi không xác định', background: '#fff url(https://www.pngitem.com/pimgs/b/149-1492667_white-background-png.png)'});
+        } 
+    });
+}
+}
+</script>
+{% endblock %}
